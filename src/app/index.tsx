@@ -1,15 +1,15 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import { Providers } from "@/app/Providers";
+import { MainPage } from "@/pages";
 
 function App() {
+	
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Aftermath Swap</h1>
-      <p>Empty starter page. Implement the task here.</p>
-    </div>
+    <Providers>
+      <MainPage />
+     </Providers>
   );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<App />);
-
