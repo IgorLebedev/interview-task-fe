@@ -1,16 +1,13 @@
-import { useDAppKit, useCurrentAccount, useCurrentNetwork } from '@mysten/dapp-kit-react';
-import { ConnectButton } from '@mysten/dapp-kit-react/ui';
-
+import { Staking } from '@/components/Staking';
+import { Header } from '@/components/Header';
 
 export const MainPage = () => {
-	const dAppKit = useDAppKit();
-	const currentAccount = useCurrentAccount();
-	const currentNetwork = useCurrentNetwork();
-
-	return (
-		<div>
-			<ConnectButton />
-			<h1>Main</h1>
-		</div>
-	)
-}
+  return (
+    <div className="h-screen w-screen flex flex-col">
+      <Header />
+      <div className="items-center flex-1 flex justify-center">
+        <Staking />
+      </div>
+    </div>
+  );
+};
