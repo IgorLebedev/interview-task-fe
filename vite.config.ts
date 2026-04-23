@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
@@ -22,4 +22,10 @@ export default defineConfig({
       },
     }),
   ],
+  test: {
+    environment: 'node',
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 });
