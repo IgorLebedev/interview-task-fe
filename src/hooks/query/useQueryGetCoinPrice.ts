@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { suiClient } from '@/lib';
-import { SUI_TYPE_ARG } from '@mysten/sui/utils';
+import { aftermath } from '@/lib/aftermath';
 
-export const useQuerySuiBalance = (address: string) => {
+export const useQueryGetCoinPrice = (coinType: string) => {
   return useQuery({
-    queryKey: ['balance', address],
-    queryFn: async () =>
-      await suiClient.core.getBalance({ owner: address, coinType: SUI_TYPE_ARG }),
-    enabled: !!address,
+    queryKey: ['coin-price', coinType],
+    queryFn: async () => {
+      const coin = await aftermath.coin();
+      const coinPrice = await coin.getPrice(coinType);
+      return coinPrice;
+    },
+    enabled: !!coinType,
     staleTime: 1_000 * 60 * 5,
-    refetchInterval: 1_000 * 20,
+    refetchInterval: 1_000 * 60,
   });
 };
