@@ -35,8 +35,13 @@ export const Staking = () => {
     errorText,
   } = useStakingForm({ balance: coinBalance });
 
-  const { isLoadingValidators, selectedValidator, setSelectedValidatorAddress, selectedValidatorAddress, validators } =
-    useValidators();
+  const {
+    isLoadingValidators,
+    selectedValidator,
+    setSelectedValidatorAddress,
+    selectedValidatorAddress,
+    validators,
+  } = useValidators();
 
   const { stake, isPending: isPendingStake } = useStakeAction({ onSuccess: () => setAmount('') });
 
