@@ -1,3 +1,4 @@
+import { NETWORK } from '@/config/constants';
 import { SuiGrpcClient } from '@mysten/sui/grpc';
 
 const GRPC_URLS = {
@@ -5,4 +6,4 @@ const GRPC_URLS = {
   mainnet: 'https://fullnode.mainnet.sui.io:443',
 };
 
-export const suiClient = new SuiGrpcClient({ network: 'mainnet', baseUrl: GRPC_URLS['mainnet'] });
+export const suiClient = new SuiGrpcClient({ network: NETWORK, baseUrl: GRPC_URLS[NETWORK] });
