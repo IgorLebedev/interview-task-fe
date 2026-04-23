@@ -1,12 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { parseToMist } from '@mysten/sui/utils';
 import { formatInputNumber } from '@/utils/';
-import { useCurrentAccount, useWalletConnection } from '@mysten/dapp-kit-react';
+import { useCurrentAccount } from '@mysten/dapp-kit-react';
 import { checkInsufficientBalance } from '@/utils/balance';
 
 export const useStakingForm = ({ balance }: { balance?: string }) => {
   const currentAccount = useCurrentAccount();
-  const connectedWallet = useWalletConnection();
 
   const [amount, setAmount] = useState<string>('');
 
@@ -35,12 +34,6 @@ export const useStakingForm = ({ balance }: { balance?: string }) => {
     if (isInsufficientBalance) return 'Insufficient balance';
     if (isLessThanOneSui) return 'Minimum amount is 1 SUI';
   })();
-
-  useEffect(() => {
-    if (!connectedWallet.isConnected) {
-      setAmount('');
-    }
-  }, [connectedWallet.isConnected]);
 
   return {
     amount,
