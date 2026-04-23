@@ -9,6 +9,12 @@ pnpm install
 pnpm start
 ```
 
+## Test
+
+```bash
+pnpm test
+```
+
 ## Build
 
 ```bash
