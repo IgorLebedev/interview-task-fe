@@ -1,3 +1,4 @@
+import { NETWORK } from '@/config/constants';
 import { Aftermath } from 'aftermath-ts-sdk';
 
 let sdkPromise: Promise<Aftermath> | null = null;
@@ -5,7 +6,7 @@ let sdkPromise: Promise<Aftermath> | null = null;
 async function getAftermathSdk() {
   if (!sdkPromise) {
     sdkPromise = (async () => {
-      const sdk = new Aftermath('MAINNET');
+      const sdk = new Aftermath(NETWORK.toUpperCase());
       await sdk.init();
       return sdk;
     })();
@@ -13,12 +14,13 @@ async function getAftermathSdk() {
   return sdkPromise;
 }
 
-export async function getStaking() {
-  const sdk = await getAftermathSdk();
-  return sdk.Staking();
-}
-
-export async function getCoin() {
-  const sdk = await getAftermathSdk();
-  return sdk.Coin();
-}
+export const aftermath = {
+  staking: async () => {
+    const sdk = await getAftermathSdk();
+    return sdk.Staking();
+  },
+  coin: async () => {
+    const sdk = await getAftermathSdk();
+    return sdk.Coin();
+  },
+};

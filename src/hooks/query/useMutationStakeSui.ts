@@ -1,4 +1,4 @@
-import { getStaking } from '@/lib/aftermath';
+import { aftermath } from '@/lib/aftermath';
 import { useMutation } from '@tanstack/react-query';
 import { useDAppKit } from '@mysten/dapp-kit-react';
 import { AFTERMATH_VALIDATOR_ADDRESS } from '@/config/constants';
@@ -15,7 +15,7 @@ interface Options {
   onError?: (error: Error) => void;
 }
 
-export const useMutationStakeSui = (options: Options) => {
+export const useMutationStakeSui = (options?: Options) => {
   const dAppKit = useDAppKit();
 
   return useMutation({
@@ -25,7 +25,7 @@ export const useMutationStakeSui = (options: Options) => {
       validatorAddress = AFTERMATH_VALIDATOR_ADDRESS,
       isSponsoredTx = false,
     }: StakeSuiParams) => {
-      const staking = await getStaking();
+      const staking = await aftermath.staking();
 
       const stakeTx = await staking.getStakeTransaction({
         suiStakeAmount: amount,
@@ -39,7 +39,7 @@ export const useMutationStakeSui = (options: Options) => {
       });
 
       if (tx.Transaction?.status.error) {
-        throw new Error(tx.Transaction?.status.error.message);
+        throw new Error(tx.Transaction.status.error.message);
       }
 
       return tx;
