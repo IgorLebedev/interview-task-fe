@@ -6,10 +6,12 @@ export const formatInputNumber = (inputValue: string) => {
   // Remove all characters except digits and dots
   value = value.replace(/[^0-9.]/g, '');
 
-  // Ensure that there is only one dot
+  // Ensure that there is only one dot and max 9 decimal places (SUI precision)
   const parts = value.split('.');
   if (parts.length > 2) {
     value = `${parts[0]}.${parts.slice(1).join('')}`;
+  } else if (parts.length === 2) {
+    value = `${parts[0]}.${parts[1].slice(0, 9)}`;
   }
 
   // Add leading zero when input starts with dot.
