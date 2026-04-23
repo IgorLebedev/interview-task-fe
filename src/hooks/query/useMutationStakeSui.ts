@@ -44,6 +44,7 @@ export const useMutationStakeSui = (options?: Options) => {
 
       return tx;
     },
+    retry: 0,
     ...options,
   });
 };
